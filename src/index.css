@@ -1,0 +1,79 @@
+@import "tailwindcss";
+/* This single line in v4 replaces the old @tailwind base/components/utilities
+   three-line setup. It pulls in Tailwind's reset, utility classes, everything. */
+
+/* Import Google Fonts — must come BEFORE @theme below */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
+
+/* In Tailwind v4, custom design tokens (colors, fonts, etc.) are defined
+   directly in CSS using @theme — instead of a JS config file.
+   This generates utility classes like bg-primary-500, font-display, etc. */
+@theme {
+  --color-primary-400: #818CF8;
+  --color-primary-500: #6366F1;
+  --color-primary-600: #4F46E5;
+
+  --color-dark-900: #0F172A;
+  --color-dark-800: #1E293B;
+  --color-dark-700: #334155;
+
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+/* Tailwind v4 still supports @custom-variant for things like dark mode
+   triggered by a class instead of system preference */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Base layer: defaults for the whole site */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-800 dark:bg-dark-900 dark:text-gray-100;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+/* Components layer: reusable multi-property class groups */
+@layer components {
+  .section {
+    @apply py-20 px-4 md:px-8 lg:px-16 max-w-7xl mx-auto;
+  }
+
+  .section-eyebrow {
+    @apply text-primary-500 font-semibold text-sm uppercase tracking-widest mb-3;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4;
+  }
+
+  .section-subtitle {
+    @apply text-gray-500 dark:text-gray-400 text-lg max-w-2xl;
+  }
+
+  .btn-primary {
+    @apply bg-primary-500 hover:bg-primary-600 text-white font-semibold
+           px-6 py-3 rounded-xl transition-all duration-300
+           hover:shadow-lg hover:shadow-primary-500/25 hover:-translate-y-0.5;
+  }
+
+  .btn-secondary {
+    @apply border-2 border-primary-500 text-primary-500 hover:bg-primary-500
+           hover:text-white font-semibold px-6 py-3 rounded-xl
+           transition-all duration-300;
+  }
+
+  .card {
+    @apply bg-white dark:bg-dark-800 rounded-2xl p-6
+           border border-gray-100 dark:border-dark-700
+           hover:shadow-xl transition-all duration-300;
+  }
+}
